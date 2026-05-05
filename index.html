@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Color Code Game</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
 <body>
+  <button id="quitBtn" class="quit-floating">Quit</button>
+
   <main class="game">
     <h1>Color Code</h1>
     <p class="subtitle">Guess the hidden 4-color sequence.</p>
@@ -28,7 +22,6 @@
     <div class="buttons">
       <button id="submitBtn">Submit Guess</button>
       <button id="clearBtn" class="secondary">Clear</button>
-      <button id="quitBtn" class="danger">Quit</button>
     </div>
 
     <p id="message" class="message"></p>
@@ -41,7 +34,4 @@
 
     <section id="board" class="board"></section>
   </main>
-
-  <script src="script.js"></script>
 </body>
-</html>

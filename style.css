@@ -183,3 +183,23 @@ button {
     text-align: center;
   }
 }
+
+/* Floating Quit Button */
+.quit-floating {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: #b23b3b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+/* Better spacing for title row */
+.guess-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
