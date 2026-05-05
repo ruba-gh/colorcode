@@ -5,12 +5,10 @@ const colors = [
   "#2a9d8f",
   "#457b9d",
   "#6a4c93",
-  "#ffafcc",
-  "#8ac926",
-  "#ffffff"
+  "#ffafcc"
 ];
 
-const codeLength = 4;
+const codeLength = 5;
 
 let secretCode = [];
 let currentGuess = [];
