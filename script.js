@@ -20,7 +20,6 @@ const board = document.getElementById("board");
 const guessSlots = document.getElementById("guessSlots");
 const colorPalette = document.getElementById("colorPalette");
 const submitBtn = document.getElementById("submitBtn");
-const clearBtn = document.getElementById("clearBtn");
 const resetBtn = document.getElementById("resetBtn");
 const quitBtn = document.getElementById("quitBtn");
 const replayBtn = document.getElementById("replayBtn");
@@ -144,10 +143,10 @@ function addGuessToBoard(result) {
 
   const feedback = document.createElement("div");
   feedback.classList.add("feedback");
-  feedback.innerHTML = `
-    ${result.correctSpot} color(s) in the correct spot<br>
-    ${result.wrongSpot} color(s) correct but wrong spot
-  `;
+feedback.innerHTML = `
+  <span class="hint correct">✅ ${result.correctSpot}</span>
+  <span class="hint warning">⚠️ ${result.wrongSpot}</span>
+`;
 
   row.appendChild(feedback);
   board.appendChild(row);
@@ -189,13 +188,6 @@ submitBtn.addEventListener("click", () => {
   message.textContent = "";
 });
 
-clearBtn.addEventListener("click", () => {
-  if (gameOver) return;
-
-  currentGuess = [];
-  updateGuessSlots();
-  message.textContent = "";
-});
 
 quitBtn.addEventListener("click", () => {
   gameOver = true;
