@@ -18,7 +18,6 @@ const board = document.getElementById("board");
 const guessSlots = document.getElementById("guessSlots");
 const colorPalette = document.getElementById("colorPalette");
 const submitBtn = document.getElementById("submitBtn");
-const resetBtn = document.getElementById("resetBtn");
 const quitBtn = document.getElementById("quitBtn");
 const replayBtn = document.getElementById("replayBtn");
 const message = document.getElementById("message");
@@ -193,7 +192,24 @@ quitBtn.addEventListener("click", () => {
   showAnswer();
 });
 
-resetBtn.addEventListener("click", startGame);
 replayBtn.addEventListener("click", startGame);
 
 startGame();
+
+const rulesBtn = document.getElementById("rulesBtn");
+const rulesModal = document.getElementById("rulesModal");
+const closeRules = document.getElementById("closeRules");
+
+rulesBtn.addEventListener("click", () => {
+  rulesModal.classList.remove("hidden");
+});
+
+closeRules.addEventListener("click", () => {
+  rulesModal.classList.add("hidden");
+});
+
+rulesModal.addEventListener("click", (e) => {
+  if (e.target === rulesModal) {
+    rulesModal.classList.add("hidden");
+  }
+});

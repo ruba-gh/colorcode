@@ -3,49 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Color Code Game</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="color-code.png" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="colorcode.png">
 </head>
 
 <body>
-
-  <button id="quitBtn" class="quit-floating">Quit</button>
+  <!-- Top Buttons -->
+  <div class="top-actions">
+    <button id="rulesBtn" class="top-btn">Rules</button>
+    <button id="quitBtn" class="top-btn danger">Quit</button>
+  </div>
 
   <main class="game">
     <h1>Color Code</h1>
-    <p class="subtitle">Guess the hidden 4-color sequence.</p>
+    <p class="subtitle">Guess the hidden color sequence.</p>
 
+    <!-- Guess Section -->
     <section class="current-guess">
-      <div class="guess-title">
-        <h2>Your Guess</h2>
-        <button id="resetBtn" class="icon-btn" title="Reset Game">↻</button>
-      </div>
-
+      <h2>Your Guess</h2>
       <div id="guessSlots" class="guess-slots"></div>
     </section>
 
+    <!-- Color Palette -->
     <section class="palette">
       <h2>Choose Colors</h2>
       <div id="colorPalette" class="color-palette"></div>
     </section>
 
+    <!-- Submit Button -->
     <div class="buttons">
-  <button id="submitBtn">Submit Guess</button>
-</div>
+      <button id="submitBtn">Submit Guess</button>
+    </div>
 
+    <!-- Message -->
     <p id="message" class="message"></p>
 
+    <!-- Answer Reveal -->
     <section id="answerBox" class="answer-box hidden">
       <h2>The Answer Was</h2>
       <div id="answerColors" class="guess-slots"></div>
       <button id="replayBtn">Replay Game</button>
     </section>
 
+    <!-- Guess History -->
     <section id="board" class="board"></section>
-
   </main>
 
+  <!-- Rules Popup -->
+  <div id="rulesModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeRules" class="close-btn">✕</button>
+
+      <h2>Game Rules</h2>
+
+      <p><strong>English:</strong></p>
+      <ul>
+        <li>Guess the hidden color sequence.</li>
+        <li>No duplicate colors in the correct answer.</li>
+        <li>Use the color palette to fill all slots.</li>
+        <li>✅ means correct color in the correct spot.</li>
+        <li>⚠️ means correct color in the wrong spot.</li>
+        <li>You have unlimited guesses.</li>
+        <li>Press Quit to reveal the answer and replay.</li>
+      </ul>
+
+      <p><strong>العربية:</strong></p>
+      <ul dir="rtl">
+        <li>خمّن تسلسل الألوان الصحيح.</li>
+        <li>لا يوجد ألوان مكررة في الحل.</li>
+        <li>استخدم لوحة الألوان لملء جميع الخانات.</li>
+        <li>✅ يعني لون صحيح في المكان الصحيح.</li>
+        <li>⚠️ يعني لون صحيح لكن في المكان الخطأ.</li>
+        <li>عدد المحاولات غير محدود.</li>
+        <li>اضغط Quit لعرض الإجابة وإعادة اللعب.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>

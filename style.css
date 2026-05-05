@@ -225,3 +225,61 @@ button {
 .warning {
   color: #f4a261;
 }
+
+/* Top buttons */
+.top-actions {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.top-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #3a3a3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.danger {
+  background: #b23b3b;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #1f1f22;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: left;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
