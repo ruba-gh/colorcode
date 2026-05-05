@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Code Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game">
+    <h1>Color Code</h1>
+    <p class="subtitle">Guess the hidden 4-color sequence.</p>
+
+    <section id="board" class="board"></section>
+
+    <section class="current-guess">
+      <h2>Your Guess</h2>
+      <div id="guessSlots" class="guess-slots"></div>
+    </section>
+
+    <section class="palette">
+      <h2>Choose Colors</h2>
+      <div id="colorPalette" class="color-palette"></div>
+    </section>
+
+    <div class="buttons">
+      <button id="submitBtn">Submit Guess</button>
+      <button id="clearBtn" class="secondary">Clear</button>
+      <button id="resetBtn" class="secondary">New Game</button>
+    </div>
+
+    <p id="message" class="message"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
