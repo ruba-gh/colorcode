@@ -11,10 +11,12 @@
     <h1>Color Code</h1>
     <p class="subtitle">Guess the hidden 4-color sequence.</p>
 
-    <section id="board" class="board"></section>
-
     <section class="current-guess">
-      <h2>Your Guess</h2>
+      <div class="guess-title">
+        <h2>Your Guess</h2>
+        <button id="resetBtn" class="icon-btn" title="Reset Game">↻</button>
+      </div>
+
       <div id="guessSlots" class="guess-slots"></div>
     </section>
 
@@ -26,10 +28,18 @@
     <div class="buttons">
       <button id="submitBtn">Submit Guess</button>
       <button id="clearBtn" class="secondary">Clear</button>
-      <button id="resetBtn" class="secondary">New Game</button>
+      <button id="quitBtn" class="danger">Quit</button>
     </div>
 
     <p id="message" class="message"></p>
+
+    <section id="answerBox" class="answer-box hidden">
+      <h2>The Answer Was</h2>
+      <div id="answerColors" class="guess-slots"></div>
+      <button id="replayBtn">Replay Game</button>
+    </section>
+
+    <section id="board" class="board"></section>
   </main>
 
   <script src="script.js"></script>

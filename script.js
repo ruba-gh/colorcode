@@ -10,12 +10,10 @@ const colors = [
   "#ffffff"
 ];
 
-const maxTries = 6;
 const codeLength = 4;
 
 let secretCode = [];
 let currentGuess = [];
-let attempts = 0;
 let gameOver = false;
 
 const board = document.getElementById("board");
@@ -24,46 +22,30 @@ const colorPalette = document.getElementById("colorPalette");
 const submitBtn = document.getElementById("submitBtn");
 const clearBtn = document.getElementById("clearBtn");
 const resetBtn = document.getElementById("resetBtn");
+const quitBtn = document.getElementById("quitBtn");
+const replayBtn = document.getElementById("replayBtn");
 const message = document.getElementById("message");
+const answerBox = document.getElementById("answerBox");
+const answerColors = document.getElementById("answerColors");
 
 function startGame() {
-  secretCode = Array.from(
-    { length: codeLength },
-    () => colors[Math.floor(Math.random() * colors.length)]
-  );
-
+  secretCode = generateUniqueCode();
   currentGuess = [];
-  attempts = 0;
   gameOver = false;
-  message.textContent = "";
 
-  createBoard();
+  board.innerHTML = "";
+  message.textContent = "";
+  answerBox.classList.add("hidden");
+
   createGuessSlots();
   createPalette();
 
   console.log("Secret code:", secretCode);
 }
 
-function createBoard() {
-  board.innerHTML = "";
-
-  for (let i = 0; i < maxTries; i++) {
-    const row = document.createElement("div");
-    row.classList.add("row");
-
-    for (let j = 0; j < codeLength; j++) {
-      const cube = document.createElement("div");
-      cube.classList.add("cube");
-      row.appendChild(cube);
-    }
-
-    const feedback = document.createElement("div");
-    feedback.classList.add("feedback");
-    feedback.textContent = "Waiting...";
-    row.appendChild(feedback);
-
-    board.appendChild(row);
-  }
+function generateUniqueCode() {
+  const shuffled = [...colors].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, codeLength);
 }
 
 function createGuessSlots() {
@@ -74,12 +56,15 @@ function createGuessSlots() {
     slot.classList.add("guess-slot");
 
     slot.addEventListener("click", () => {
+      if (gameOver) return;
       currentGuess.splice(i, 1);
       updateGuessSlots();
     });
 
     guessSlots.appendChild(slot);
   }
+
+  updateGuessSlots();
 }
 
 function createPalette() {
@@ -95,7 +80,9 @@ function createPalette() {
     }
 
     colorBtn.addEventListener("click", () => {
-      if (currentGuess.length < codeLength && !gameOver) {
+      if (gameOver) return;
+
+      if (currentGuess.length < codeLength) {
         currentGuess.push(color);
         updateGuessSlots();
       }
@@ -135,12 +122,48 @@ function checkGuess() {
       if (!secretUsed[j] && currentGuess[i] === secretCode[j]) {
         wrongSpot++;
         secretUsed[j] = true;
+        guessUsed[i] = true;
         break;
       }
     }
   }
 
   return { correctSpot, wrongSpot };
+}
+
+function addGuessToBoard(result) {
+  const row = document.createElement("div");
+  row.classList.add("row");
+
+  currentGuess.forEach(color => {
+    const cube = document.createElement("div");
+    cube.classList.add("cube");
+    cube.style.backgroundColor = color;
+    row.appendChild(cube);
+  });
+
+  const feedback = document.createElement("div");
+  feedback.classList.add("feedback");
+  feedback.innerHTML = `
+    ${result.correctSpot} color(s) in the correct spot<br>
+    ${result.wrongSpot} color(s) correct but wrong spot
+  `;
+
+  row.appendChild(feedback);
+  board.appendChild(row);
+}
+
+function showAnswer() {
+  answerColors.innerHTML = "";
+
+  secretCode.forEach(color => {
+    const slot = document.createElement("div");
+    slot.classList.add("guess-slot");
+    slot.style.backgroundColor = color;
+    answerColors.appendChild(slot);
+  });
+
+  answerBox.classList.remove("hidden");
 }
 
 submitBtn.addEventListener("click", () => {
@@ -151,43 +174,36 @@ submitBtn.addEventListener("click", () => {
     return;
   }
 
-  const row = board.children[attempts];
-  const cubes = row.querySelectorAll(".cube");
-  const feedback = row.querySelector(".feedback");
-
-  currentGuess.forEach((color, index) => {
-    cubes[index].style.backgroundColor = color;
-  });
-
   const result = checkGuess();
-
-  feedback.innerHTML = `
-    ${result.correctSpot} color(s) in the correct spot<br>
-    ${result.wrongSpot} color(s) correct but wrong spot
-  `;
+  addGuessToBoard(result);
 
   if (result.correctSpot === codeLength) {
     message.textContent = "You won! Correct sequence.";
     gameOver = true;
+    showAnswer();
     return;
   }
 
-  attempts++;
-  currentGuess = [];
-  updateGuessSlots();
-
-  if (attempts === maxTries) {
-    message.textContent = "Game over! Try a new game.";
-    gameOver = true;
-  }
-});
-
-clearBtn.addEventListener("click", () => {
   currentGuess = [];
   updateGuessSlots();
   message.textContent = "";
 });
 
+clearBtn.addEventListener("click", () => {
+  if (gameOver) return;
+
+  currentGuess = [];
+  updateGuessSlots();
+  message.textContent = "";
+});
+
+quitBtn.addEventListener("click", () => {
+  gameOver = true;
+  message.textContent = "You quit. Here is the answer.";
+  showAnswer();
+});
+
 resetBtn.addEventListener("click", startGame);
+replayBtn.addEventListener("click", startGame);
 
 startGame();
