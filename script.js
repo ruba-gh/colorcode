@@ -8,7 +8,7 @@ const colors = [
   "#ffafcc"
 ];
 
-const codeLength = 5;
+const codeLength = 4;
 
 let secretCode = [];
 let currentGuess = [];
